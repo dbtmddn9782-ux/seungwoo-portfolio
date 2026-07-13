@@ -672,7 +672,7 @@
 			width: 100%;
 			max-height: 85vh;
 			overflow-y: auto;
-			padding: 44px;
+			padding: 60px 44px 44px;
 			position: relative;
 		}
 
@@ -693,6 +693,127 @@
 		.modal-close:hover {
 			border-color: var(--ink);
 		}
+
+		/* --- scroll reveal --- */
+		.reveal {
+			opacity: 0;
+			transform: translateY(28px);
+			transition: opacity .7s cubic-bezier(.2, .8, .2, 1), transform .7s cubic-bezier(.2, .8, .2, 1);
+		}
+
+		.reveal.visible {
+			opacity: 1;
+			transform: none;
+		}
+
+		.reveal-group>* {
+			transition-delay: calc(var(--stagger, 0) * 90ms);
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			.reveal {
+				opacity: 1;
+				transform: none;
+				transition: none;
+			}
+		}
+
+		/* --- project thumbnails --- */
+		.project-thumb {
+			position: relative;
+			margin: -28px -32px 22px;
+			border-radius: 16px 16px 0 0;
+			overflow: hidden;
+			aspect-ratio: 16/10;
+			background: linear-gradient(150deg, var(--bg-soft), #ececea);
+		}
+
+		.project-thumb .browser-bar {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			height: 26px;
+			background: #fff;
+			border-bottom: 1px solid var(--line);
+			display: flex;
+			align-items: center;
+			gap: 5px;
+			padding: 0 10px;
+			z-index: 2;
+		}
+
+		.project-thumb .browser-bar span {
+			width: 7px;
+			height: 7px;
+			border-radius: 50%;
+			background: var(--line);
+		}
+
+		.project-thumb img {
+			position: absolute;
+			inset: 0;
+			top: 26px;
+			width: 100%;
+			height: calc(100% - 26px);
+			object-fit: cover;
+			object-position: top;
+		}
+
+		.project-thumb .thumb-fallback {
+			position: absolute;
+			inset: 0;
+			top: 26px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-family: 'Poppins', sans-serif;
+			font-size: 15px;
+			font-weight: 500;
+			color: var(--ink-soft);
+			letter-spacing: 0.02em;
+			background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+			background-size: 22px 22px;
+		}
+
+		.project-thumb .thumb-fallback::before {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background: radial-gradient(circle at 30% 30%, rgba(255, 90, 54, 0.10), transparent 60%);
+		}
+
+		.modal-thumb {
+			aspect-ratio: 16/9;
+			border-radius: 14px;
+			overflow: hidden;
+			position: relative;
+			margin-bottom: 20px;
+			background: linear-gradient(150deg, var(--bg-soft), #ececea);
+			border: 1px solid var(--line);
+		}
+
+		.modal-thumb img {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: top;
+		}
+
+		.modal-thumb .thumb-fallback {
+			position: absolute;
+			inset: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-family: 'Poppins', sans-serif;
+			font-size: 14px;
+			color: var(--ink-soft);
+			background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+			background-size: 22px 22px;
+		}
 	</style>
 </head>
 
@@ -700,7 +821,7 @@
 
 	<header>
 		<div class="wrap">
-			<a class="brand" href="#home">유승우<span>.dev</span></a>
+			<a class="brand" href="#home">Yoo<span>.dev</span></a>
 			<button class="nav-toggle" id="navToggle">☰</button>
 			<nav>
 				<ul id="navList">
@@ -733,8 +854,8 @@
 			<div class="head-tag">About</div>
 			<h2 class="head-title">About Me</h2>
 			<div class="about-grid">
-				<div class="avatar">Y</div>
-				<div class="about-copy">
+				<div class="avatar reveal">Y</div>
+				<div class="about-copy reveal">
 					<p>스마트헬스케어 전공이 폐지되며 진로를 다시 고민하던 중, AI·소프트웨어 개발로 방향을 바꿔 KH정보교육원에서 백엔드부터 프론트엔드까지 기초를 탄탄히 쌓았습니다.</p>
 					<p>Spring Boot와 React를 기본 스택으로 두 개의 팀 프로젝트에서 관리자 페이지 전체 설계부터 CRUD 기능까지 직접 구현하며, 문제가 생기면 그 자리에서 바로
 						원인을 파고들어 처리하는 방식으로 일합니다.</p>
@@ -745,7 +866,7 @@
 						<li><span>GitHub</span><span>https://github.com/dbtmddn9782-ux</span></li>
 					</ul>
 					<div class="highlights">
-						<div class="highlight">
+						<div class="highlight reveal">
 							<div class="num">2건</div>
 							<div class="label">팀 프로젝트</div>
 						</div>
@@ -753,8 +874,8 @@
 							<div class="num">1인</div>
 							<div class="label">관리자 페이지 단독 구현</div>
 						</div> -->
-						<div class="highlight">
-							<div class="num">Java/React</div>
+						<div class="highlight reveal">
+							<div class="num">Spring Boot/Java</div>
 							<div class="label">주력 기술 스택</div>
 						</div>
 					</div>
@@ -768,18 +889,18 @@
 			<div class="head-tag">Education</div>
 			<h2 class="head-title">Education</h2>
 			<div class="timeline">
-				<div class="t-item">
+				<div class="t-item reveal">
 					<span class="t-date" style="color:var(--accent)">2020.03-2023.06</span>
 					<h3>스마트헬스케어 전공</h3>
 					<span class="t-org">중부대학교</span>
 				</div>
-				<div class="t-item">
+				<div class="t-item reveal">
 					<span class="t-date" style="color:var(--accent)">2023.08-2026.02</span>
 					<h3>인공지능 전공 전과</h3>
 					<span class="t-org">중부대학교</span>
 					<p>인공지능 전공으로 졸업하였습니다.</p>
 				</div>
-				<div class="t-item">
+				<div class="t-item reveal">
 					<span class="t-date" style="color:var(--accent)">2026.01-2026.07</span>
 					<h3>풀스택 웹 개발 과정</h3>
 					<span class="t-org">KH정보교육원</span>
@@ -794,12 +915,12 @@
 			<div class="head-tag">Certifications</div>
 			<h2 class="head-title">Certifications</h2>
 			<div class="cert-grid">
-				<div class="cert-card">
+				<div class="cert-card reveal">
 					<span class="cert-date">2025.12</span>
 					<h3>SQLD</h3>
 					<span class="cert-org">한국데이터산업진흥원</span>
 				</div>
-				<div class="cert-card">
+				<div class="cert-card reveal">
 					<span class="cert-date">2024.12</span>
 					<h3>지능형홈관리사</h3>
 					<span class="cert-org">한국정보통신자격협회</span>
@@ -813,27 +934,27 @@
 			<div class="head-tag">Skills</div>
 			<h2 class="head-title">Skills</h2>
 			<div class="skills-grid">
-				<div class="skill-row">
+				<div class="skill-row reveal">
 					<div class="skill-top"><b>Java</b><span>80%</span></div>
 					<div class="bar"><i data-w="80"></i></div>
 				</div>
-				<div class="skill-row">
+				<div class="skill-row reveal">
 					<div class="skill-top"><b>Spring Boot</b><span>80%</span></div>
 					<div class="bar"><i data-w="80"></i></div>
 				</div>
-				<div class="skill-row">
+				<div class="skill-row reveal">
 					<div class="skill-top"><b>React</b><span>65%</span></div>
 					<div class="bar"><i data-w="65"></i></div>
 				</div>
-				<div class="skill-row">
+				<div class="skill-row reveal">
 					<div class="skill-top"><b>Oracle</b><span>85%</span></div>
 					<div class="bar"><i data-w="85"></i></div>
 				</div>
-				<div class="skill-row">
+				<div class="skill-row reveal">
 					<div class="skill-top"><b>JavaScript</b><span>75%</span></div>
 					<div class="bar"><i data-w="75"></i></div>
 				</div>
-				<div class="skill-row">
+				<div class="skill-row reveal">
 					<div class="skill-top"><b>HTML</b><span>75%</span></div>
 					<div class="bar"><i data-w="75"></i></div>
 				</div>
@@ -847,7 +968,13 @@
 			<h2 class="head-title">Projects</h2>
 
 			<div class="project-grid">
-				<div class="project-mini" data-project="ddeonabom">
+				<div class="project-mini reveal" data-project="ddeonabom">
+					<div class="project-thumb">
+						<div class="browser-bar"><span></span><span></span><span></span></div>
+						<img src="images/travel.jpg" alt="떠나봄 관리자 페이지 스크린샷"
+							onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+						<div class="thumb-fallback" style="display:none;">떠나봄 · Admin</div>
+					</div>
 					<span class="t-date">2026.05 - 2026.07</span>
 					<h3>떠나봄 — 여행 커뮤니티 플랫폼</h3>
 					<span class="t-org">관리자 페이지 단독 설계 및 구현</span>
@@ -856,7 +983,13 @@
 					</div>
 				</div>
 
-				<div class="project-mini" data-project="myhealthkitchen">
+				<div class="project-mini reveal" data-project="myhealthkitchen">
+					<div class="project-thumb">
+						<div class="browser-bar"><span></span><span></span><span></span></div>
+						<img src="images/mkh.png" alt="My-Health-Kitchen 식단 게시판 스크린샷"
+							onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+						<div class="thumb-fallback" style="display:none;">My-Health-Kitchen</div>
+					</div>
 					<span class="t-date">2026.04 - 2026.05</span>
 					<h3>My-Health-Kitchen — 식단 공유 플랫폼</h3>
 					<span class="t-org">식단(Diet) 게시판 담당</span>
@@ -870,6 +1003,11 @@
 
 	<!-- 모달에 넣을 상세 내용 (화면에는 안 보임) -->
 	<template id="tpl-ddeonabom">
+		<div class="modal-thumb">
+			<img src="images/finalmain.png" alt="떠나봄 관리자 페이지 상세 스크린샷"
+				onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+			<div class="thumb-fallback" style="display:none;">떠나봄 관리자 페이지</div>
+		</div>
 		<span class="t-date">KH 교육 팀 프로젝트 · 6인 팀 · 2026.05 - 2026.07</span>
 		<h3 style="font-size:22px;font-weight:600;margin:6px 0 2px;">떠나봄 — 여행 커뮤니티 플랫폼</h3>
 		<span class="t-org" style="font-size:14px;color:var(--ink-soft);font-weight:500;">관리자 페이지 단독 설계 및 구현</span>
@@ -891,8 +1029,13 @@
 	</template>
 
 	<template id="tpl-myhealthkitchen">
+		<div class="modal-thumb">
+			<img src="images/semimain.png" alt="My-Health-Kitchen 식단 게시판 상세 스크린샷"
+				onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+			<div class="thumb-fallback" style="display:none;">My-Health-Kitchen 식단 게시판</div>
+		</div>
 		<span class="t-date">KH 교육 팀 프로젝트 · 5인 팀 · 2026.04 - 2026.05</span>
-		<h3 style="font-size:22px;font-weight:600;margin:6px 0 2px;">My-Health-Kitchen — 식단 게시판</h3>
+		<h3 style="font-size:22px;font-weight:600;margin:6px 0 2px;">My-Health-Kitchen — 식단 공유 플랫폼</h3>
 		<span class="t-org" style="font-size:14px;color:var(--ink-soft);font-weight:500;">식단(Diet) 게시판 담당</span>
 		<div class="kv"><b>기술 스택</b> · Spring Boot, Thymeleaf, MyBatis, Oracle</div>
 		<ul class="bullet-list compact">
@@ -922,17 +1065,17 @@
 			<div class="head-tag">Contact</div>
 			<h2 class="head-title">함께 성장할 팀을 찾고 있습니다.</h2>
 			<div class="contact-grid">
-				<div class="contact-card">
+				<div class="contact-card reveal">
 					<div class="ic">📍</div>
 					<h4>Address</h4>
 					<p>서울시 영등포구 당산동</p>
 				</div>
-				<div class="contact-card">
+				<div class="contact-card reveal">
 					<div class="ic">📞</div>
 					<h4>Contact Number</h4>
 					<p>010-7178-9782</p>
 				</div>
-				<div class="contact-card">
+				<div class="contact-card reveal">
 					<div class="ic">✉️</div>
 					<h4>Email</h4>
 					<p>dbtmddn9782@naver.com</p>
@@ -961,6 +1104,17 @@
 			rotateEl.style.opacity = 0;
 			setTimeout(() => { rotateEl.textContent = roles[ri]; rotateEl.style.opacity = 1; }, 250);
 		}, 2200);
+
+		const revealEls = document.querySelectorAll('.reveal');
+		const revealIO = new IntersectionObserver((entries) => {
+			entries.forEach(e => {
+				if (e.isIntersecting) { e.target.classList.add('visible'); revealIO.unobserve(e.target); }
+			});
+		}, { threshold: 0.15 });
+		revealEls.forEach((el, i) => {
+			el.style.setProperty('--stagger', i % 6);
+			revealIO.observe(el);
+		});
 
 		const bars = document.querySelectorAll('.bar i');
 		const io = new IntersectionObserver((entries) => {
